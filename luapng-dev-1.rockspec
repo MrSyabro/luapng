@@ -1,11 +1,11 @@
 package = "luapng"
 version = "dev-1"
 source = {
-   url = "git+https://git@github.com/MrSyabro/luaort.git",
+   url = "git+https://git@github.com/MrSyabro/luapng.git",
    branch = "master",
 }
 description = {
-   homepage = "https://github.com/MrSyabro/luaort",
+   homepage = "https://github.com/MrSyabro/luapng",
    license = "MIT/X11",
    maintainer = "MrSyabro",
 }
@@ -16,8 +16,8 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      pngutils = {
-        sources = { "src/pngutils.c", },
+      luapng = {
+        sources = { "src/luapng.c", },
         libraries = {"png"},
       }
    },
