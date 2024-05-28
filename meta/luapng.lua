@@ -3,32 +3,28 @@
 ---@class PNGUtils
 local M = {}
 
----Читает и декодирует png
+---Read data from file and convert HWC to CHW
 ---@param inputfile any
----@return number width
----@return number height
 ---@return string data
+---@return number height
+---@return number width
 function M.read(inputfile)
 end
 
----Кодирует и записывает png
+---Read grayscale data from file and convert HWC to CHW
+---@param inputfile any
+---@return string data
+---@return number height
+---@return number width
+function M.read_grayscale(inputfile)
+end
+
+---Convert CHW to HWC and write data to file
 ---@param data string данные для записи
 ---@param height integer
 ---@param width integer
 ---@param outputfile string имя файла
 function M.write(data, height, width, outputfile)
-end
-
----convert input from CHW format to HWC format
----@param data string CHW data
----@return string data HWC data
-function M.chw2hwc(data)
-end
-
----convert input from HWC format to CHW format
----@param data string
----@return string data
-function M.hwc2chw(data)
 end
 
 return M
