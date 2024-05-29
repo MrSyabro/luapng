@@ -84,8 +84,6 @@ static int l_read_grayscale_image_file(lua_State *L)
 {
     const char *input_file = luaL_checkstring(L, 1);
     size_t input_data_length;
-    float* out;
-    size_t output_count;
 
     png_image image;
     memset(&image, 0, sizeof image);
@@ -98,13 +96,16 @@ static int l_read_grayscale_image_file(lua_State *L)
     input_data_length = PNG_IMAGE_SIZE(image);
 
     char* buffer = calloc(input_data_length, sizeof(char));
+    float* out = calloc(input_data_length, sizeof(float));
     if (png_image_finish_read(&image, NULL /*background*/, buffer, 0 /*row_stride*/, NULL /*colormap*/) == 0)
     {
         luaL_error(L, "Finish reading image file failed");
     }
-    hwc_to_chw((const uint8_t*)buffer, image.height, image.width, &out, &output_count);
+    for (size_t i = 0; i < input_data_length; i++) {
+        out[i] = (float)buffer[i];
+    }
 
-    lua_pushlstring(L, (const char*)out, output_count * sizeof(float));
+    lua_pushlstring(L, (const char*)out, input_data_length * sizeof(float));
     lua_pushinteger(L, image.height);
     lua_pushinteger(L, image.width);
     free(buffer);
